@@ -1,0 +1,60 @@
+[LE Calculation Card - Regional]
+:Properties
+Sheetname | LE Calculation Card - Regional
+Action | Navigate
+Recursive | false
+Redirect-Enabled | false
+:Pre-Prep
+skip:
+:Pre-Steps
+skip:
+:Fields
+setExcelRow: Setup and Maintenance > Implementation Projects > Workforce Deployment > Define Common Applications Configuration for Human Capital Management > Define Enterprise Structures for Human Capital Management > Define Legal Entities for Human Capital Management > Manage Legal Entity Calculation Cards
+//Calculation Card
+setExcelCol: Calculation Card
+CalculationCard | textbox | xpath | //input[contains(@id,'value00::content')]
+EffectiveDate | textbox | xpath | //input[contains(@id,'qryId1:value10::content')] | wait 12 -c
+ClickSearch | button | xpath | //button[text()='Search'] | wait 12 -c
+CalculationCard | button | xpath | //a[text()='$.sCalculation Card']
+//ComponentGroups-Regional
+setExcelCol: *State
+Regional | button | xpath | //a[text()='Regional'] | wait 12 -c
+ClickCreate | button | xpath | //a/img[contains(@id,'_ATTp:create::icon')][@title='Create'] | wait 3
+State | select | xpath | //select[contains(@id,'ATR2:soc1::content')] | unstale
+ClickOkButton | button | xpath | //button[contains(@accesskey,'K')] 
+Save | button | xpath | //span[text()='Save'] | wait 12 -c :throws closepopup
+ClickOnRegional | button | xpath | //a[text()='Regional']
+//Scrolldown | button | xpath | //div[contains(@id,'_ATTp:tree2::scroller')] | wait 3
+ClickOnRegionalState | button | xpath | //a[text()='$.s*State']
+//CalculationComponent
+ClickStateIncomeTax | button | xpath | //span[text()='State Income Tax'] | wait 3
+//StateIncomeTax:Details
+EditButton | button | xpath | //div[contains(@id,'AT4:_ATp:m2')]/div/table/tbody/tr/td[2]/a[text()='Edit'] | wait 12 -c
+ClickCorrect | button | xpath | //tr[contains(@id,'AT4:_ATp:correctCompDetailMenu')]/td[text()='Correct'] | wait 12 -p
+setExcelCol: Supplemental Tax Calculation Method
+Tax Calculation Method | textbox-enter | xpath | //label[text()='Supplemental Tax Calculation Method']/../..//td//input | wait 2
+Resident Wage Accumulation | textbox-enter | xpath | //label[text()='Resident Wage Accumulation']/../..//td//input | wait 2
+County Tax Withholding Rule | textbox-enter | xpath | //label[text()='County Tax Withholding Rule']/../..//td//input | wait 2
+City Tax Withholding Rule | textbox-enter | xpath | //label[text()='City Tax Withholding Rule']/../..//td//input | wait 2
+//StateUnemployment
+ClickStateUnemployment | button | xpath | //span[text()='State Unemployment'] | wait 2
+//StateUnemployment:Details
+Calculation Component Details | button | xpath | //a[text()='Calculation Component Details'] | wait 3
+EditButton | button | xpath | //div[contains(@id,'AT4:_ATp:m2')]/div/table/tbody/tr/td[2]/a[text()='Edit'] | wait 12 -c
+ClickCorrect | button | xpath | //tr[contains(@id,'AT4:_ATp:correctCompDetailMenu')]/td[text()='Correct'] | wait 12 -p
+InputSelf Adjustment Method | textbox-enter | xpath | //label[text()='Self Adjustment Method']/../..//td//input | wait 12 -c
+//StateDisability
+ClickStateDisability | button | xpath | //span[text()='State Disability']
+Calculation Component Details | button | xpath | //a[text()='Calculation Component Details']
+EditButton | button | xpath | //div[contains(@id,'AT4:_ATp:m2')]/div/table/tbody/tr/td[2]/a[text()='Edit']
+ClickCorrect | button | xpath | //tr[contains(@id,'AT4:_ATp:correctCompDetailMenu')]/td[text()='Correct'] | wait 3
+State Disability | textbox-enter | xpath | //input[contains(@id,'STATE_SELF_ADJUST_METHOD')]
+Save | button | xpath | //span[text()='Save']
+:Post-Steps
+SaveAndClose | button | xpath | //a[@accesskey='S']/span
+:Undo-Steps
+Cancel | button | xpath | //span[text()='C']
+case: closepopup
+Closeokpopup | button | xpath | //button[contains(@id,'commandButton1')]
+Save | button | xpath | //span[text()='Save']
+resume esac

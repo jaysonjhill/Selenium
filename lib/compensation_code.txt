@@ -1,0 +1,212 @@
+[Manage Worker Goal Descriptive Flexfields]
+:Properties
+Sheetname | MWGDF
+Action | Search Task
+Recursive | false
+:Pre-Prep
+skip:
+:Pre-Steps
+Header | h1 | xpath | //h1[text()='Manage Worker Goal Descriptive Flexfields']
+Flexfield Name | jsbutton | xpath | //a[text()='$String']
+Header | h1 | xpath | //h2[text()='Search Results']
+Flexfield Code | jsbutton | xpath | //td[text()='$String']/..
+Edit | jsbutton | xpath | //img[@title='Edit'][contains(@id,'dynamic')] | wait 5
+Header | h1 | xpath | //h2[text()='Global Segments']
+Create | button | xpath | //img[@title='Create']/.. | wait 5
+Header | h1 | xpath | //h1[text()='Create Segment']
+:Fields
+//Dummy
+Header | h1 | xpath | //h1[text()='Create Segment']
+Header | h1 | xpath | //h1[text()='Create Segment']
+//
+*Name | textbox | xpath | //label[text()='Name']/../..//input
+* Code | h1 | xpath | //label[text()='Code']/../..//input[@value='$String'] | wait 5
+API Name | h1 | xpath | //label[text()='API Name']/../..//input[@value='$String']
+Description | textbox | xpath | //label[text()='Description']/../..//textarea
+Enabled | checkbox | xpath | //label[text()='Enabled']/../..//input
+Data Type | select | xpath | //label[text()='Data Type']/../..//select | unstale
+Table Column | h1 | xpath | //label[text()='Table Column']/../..//input | wait 5
+Value Set | textbox | xpath | //label[text()='Value Set']/../..//input
+Value Set Description | h1 | xpath | //label[text()='Value Set Description']/../..//span[text()='$String'] | wait 5
+Range Type | select | xpath | //label[text()='Range Type']/../..//select | unstale
+Required | checkbox | xpath | //label[text()='Required']/../..//input
+Default Type | select | xpath | //label[text()='Default Type']/../..//select | unstale
+Prompt | textbox | xpath | //label[text()='Prompt']/../..//input
+Display Type | select | xpath | //label[text()='Display Type']/../..//select | unstale
+Display Size | textbox | xpath | //label[text()='Display Size']/../..//input
+Display Height | textbox | xpath | //label[text()='Display Height']/../..//input
+Definition Help Text | textbox | xpath | //label[text()='Definition Help Text']/../..//textarea
+Instruction Help Text | textbox | xpath | //label[text()='Instruction Help Text']/../..//textarea
+Read-Only | checkbox | xpath | //label[text()='Read-only']/../..//input
+BI Enabled | checkbox | xpath | //label[text()='BI Enabled']/../..//input
+BI Select | select | xpath | //label[text()='BI Label']/../..//select | unstale
+:Post-Steps
+SnC | button | xpath | //span[text()='S']/../../../..
+Header | button | xpath | //h2[text()='Global Segments']
+Snc | button | xpath | //span[text()='S']/..
+Header | button | xpath | //h2[text()='Search Results']
+Deploy Flexfield | jsbutton | xpath | //span[text()='Deploy Flexfield']/.. | wait 5
+Modal | button | xpath | //div[contains(@class,'Modal')]
+WAIT UNTIL CLICKABLE | button | xpath | //div[text()='HRG_GOALS : Confirmation']
+Header | button | xpath | //div[text()='HRG_GOALS : Confirmation']
+WAIT UNTIL CLICKABLE | button | xpath | //button[text()='OK'][contains(@id,'dynamic')]
+OK | button | xpath | //button[text()='OK'][contains(@id,'dynamic')] | wait 5
+WAIT UNTIL CLICKABLE | button | xpath | //span[text()='o']/../..//button[contains(@id,'dynamic')]
+Done | button | xpath | //span[text()='o']/../..//button[contains(@id,'dynamic')] | wait 6
+:Undo-Steps
+Cancel | button | xpath | //span[text()='C']/..
+Header | button | xpath | //h2[text()='Global Segments']
+Cancel | button | xpath | //span[text()='C']/..
+Header | button | xpath | //h2[text()='Search Results']
+Done | button | xpath | //span[text()='o']/../..//button[contains(@id,'dynamic')] | wait 5
+
+[Manage Performance Notifications]
+:Properties
+Sheetname | MPN
+Action | Search Task
+Recursive | false
+:Pre-Prep
+skip:
+:Pre-Steps
+Header | h1 | xpath | //h1[text()='Manage Talent Notifications']
+:Fields
+Module Tab | button | xpath | //a[text()='Performance Management']
+Header | h1 | xpath | //h1[text()='Manage Talent Notifications']
+array | 1
+Notification | h1 | xpath | //td[text()="$String"] | locate
+Description | h1 | xpath | //td[text()="$String"]
+Notification | checkbox | xpath | //td[text()="$String"]/..//input
+stop
+:Post-Steps
+Save and Close | button | xpath | //span[text()='S']/../.. | wait 5
+Header | h1 | xpath | //h1[text()='Search']
+MPN | button | xpath | //a[text()='Manage Performance Notifications']
+:Undo-Steps
+skip:
+
+[Manage Action Reasons]
+:Properties
+Sheetname | Manage Action Reasons
+Action | Search Task
+Recursive | false
+:Pre-Prep
+skip:
+:Pre-Steps
+Header | button | xpath | //h1[text()='Manage Action Reasons']
+Add | button | xpath | //img[contains(@title,'Add')]/..//img[contains(@id,'AT2')] | wait
+:Fields
+*Action Reason Code | textbox | xpath | //tr[contains(@class,'Selected')]//td[contains(@title,'Action Reason Code')]//input | wait
+*Action Reason | textbox | xpath | //table[@summary='Action Reasons']//tbody//tr//td[4]//input
+*Reason Start Date | textbox | xpath | //table[@summary='Action Reasons']//tbody//tr//td[5]//input
+*Reason End Date | textbox | xpath | //table[@summary='Action Reasons']//tbody//tr//td[6]//input
+:Post-Steps
+Header
+Save | button | xpath | //button[text()='Save'] | wait
+Yes | button | xpath | //div[text()='Warning']/../../../../../../..//button[text()='Yes'][not(contains(@id,'OWD'))][not(contains(@id,'DWD'))] | wait
+Confirmation | button | xpath | //div[text()='Confirmation']/../../../../../../..//button[text()='OK']
+Done | button | xpath | //button[text()='Save']/../../../../../../..//span[text()='o']/..
+:Undo-Steps
+Cancel | button | xpath | //button[contains(@accesskey,'C')]
+Yes | button | xpath | //div[text()='Warning']/../../../../../../..//button[text()='Yes'][not(contains(@id,'OWD'))][not(contains(@id,'DWD'))]
+
+[Manage Actions]
+:Properties
+Sheetname | Manage Actions
+Action | Search Task
+Recursive | False
+:Pre-Prep
+skip:
+:Pre-Steps
+Header | button | xpath | //h1[text()='Manage Actions']
+:Fields
+array | 0
+Add | button | xpath | //img[@title='Add']/../.. | wait 5
+Action Code | textbox | xpath | //table[@summary='Action']//label[text()='Action Code']/..//input
+Error Workaround | button | xpath | //h1[text()='Manage Actions'] | wait 6
+Action Name | textbox | xpath | //table[@summary='Action']//label[text()='Action Name']/..//input
+Start Date | textbox | xpath | //table[@summary='Action']//label[text()='Start Date']/..//input
+End Date | textbox | xpath | //table[@summary='Action']//label[text()='End Date']/..//input
+Action Type | select | xpath | //table[@summary='Action']//label[text()='Action Type']/..//select
+Created By | h1 | xpath | //span[text()='Created By']
+RRA | dropdown | xpath | //label[contains(text(),'Reorganization')]/..//input
+Termination | dropdown | xpath | //label[contains(text(),'Termination')]/..//input
+stop
+:Post-Steps
+Save | button | xpath | //button[text()='Save']
+Yes | button | xpath | //td[contains(@id,'dialog')]//button[text()='Yes']
+OK | button | xpath | //div[text()='Confirmation']/../../../../../../..//button[text()='OK']
+:Undo-Steps
+Cancel | button | xpath | //span[text()='C']/..
+Yes | button | xpath | //td[contains(@id,'dialog')]//button[text()='Yes']
+
+
+[Manage Potential Assessment]
+:Properties
+Sheetname | Manage Potential Assessment
+Action | Search Task
+Recursive | false
+Redirect-Enabled | false
+Data Name | *Name
+:Pre-Prep
+skip:
+:Pre-Steps
+HeaderMQ | h1 | xpath | //h1[text()='Manage Questionnaires']
+Create | button | xpath | //span[text()=' Create']/..
+:Fields
+setExcelCol: Questionnaire Template ID
+HeaderCQ | button | xpath | //div[text()='Create Questionnaire'] | wait 12 -p
+QTID | textbox | xpath | //label[text()='Questionnaire Template ID']/../..//input
+Name | textbox-enter | xpath | //label[text()='Name']/../..//input
+//CQSearch | button | xpath | //div[text()='Create Questionnaire']/../../../../../../..//button[text()='Search'] | wait
+CQclick | button | xpath | //td//td[1][contains(text(),'100')]/..//td[2][contains(text(),'Potential Rating Questionnaire Template')]/.. | wait 12 -c :throws InvalidQuestionnaireTemplate
+CQokay | button | xpath | //div[text()='Create Questionnaire']/../../../../../../..//button[contains(@accesskey,'K')][not(@disabled)] | wait 12 -c :throws InvalidQuestionnaireTemplate
+HeaderCQBI | button | xpath | //h1[text()='Create Questionnaire Basic Information']
+setExcelCol: *Name
+NameCQBI | textbox | xpath | //label[text()='Name']/../..//input
+setExcelCol: *Status
+StatusCQBI | select | xpath | //label[text()='Status']/../..//select | unstale
+setExcelCol: Instructions and Help Materials
+SCEM | button | xpath | //img[contains(@title,'Source Code Editing Mode')] 
+IAHMtext | textbox | xpath | //label[text()='Introduction']/../..//textarea
+CQBInext | button | xpath | //button[contains(@accesskey,'x')]
+HeaderCQC | button | xpath | //h1[text()='Create Questionnaire Contents']
+setExcelCol: Section Order
+SectionOrder | select | xpath | //label[text()='Section Order']/../..//select | unstale
+SectionPresentation | select2 | xpath | //label[text()='Section Presentation']/../..//select | unstale
+PageLayout | select | xpath | //label[text()='Page Layout']/../..//select | unstale
+MNoQpp | textbox | xpath | //label[text()='Maximum Number of Questions per Page']/../..//input
+CreateSection | button | xpath | //h1[text()='Sections']/../../../../../../..//span[text()=' Create']/..
+HeaderCS | button | xpath | //div[text()='Create Section'] | wait 12 -p
+Title | textbox | xpath | //label[text()='Title']/../..//input
+HeaderCS | h1 | xpath | //div[text()='Create Section']
+Description | textbox | xpath | //label[text()='Description']/../..//textarea
+OK | button | xpath | //div[text()='Create Section']/../../../../../../..//button[contains(@accesskey,'K')]
+QuestionOrder | select2 | xpath | //tr//td[1]/..//td[4]//span//select | unstale
+ResponseOrder | select2 | xpath | //tr//td[1]/..//td[5]//span//select | unstale
+Required | checkbox | xpath | //tr//td[1][text()='$.sTitle']/..//td[6]//span//span//span//input
+NewPage | checkbox | xpath | //tr//td[1][text()='$.sTitle']/..//td[7]//span//span//span//input
+CreateQuestion | button | xpath | //div[contains(@id,'createQstnBtn')]//a//span[text()=' Create']
+setExcelCol: Question Text
+QuestionText | textbox | xpath | //div[contains(@id,'createQstn')]//label[text()='Question Text']/../..//textarea
+Presentation | select2 | xpath | //div[contains(@id,'createQstn')]//label[text()='Presentation']/../..//select | unstale
+array | 26
+ShortDescription | textbox | xpath | //div[contains(@id,'createQstn')]//td[text()='$.sShort Description']/..//td[2]//span//input
+stop
+SnC | button | xpath | //div[contains(@id,'createQstn')]//span[text()='ave and Close']/.. | wait 10
+HeaderCQC | button | xpath | //h1[text()='Create Questionnaire Contents']
+setExcelCol: Response Type
+Response Type | select2 | xpath | //td[contains(text(),'$.sQuestion Text')]/..//td[3]//span//select | wait,unstale
+HeaderCQC | h1 | xpath | //h1[text()='Create Questionnaire Contents']
+:Post-Steps
+SnC | button | xpath | //h1[text()='Create Questionnaire Contents']/../../../../../../../../..//span[text()='ave and Close']/..
+OK | button | xpath | //button[contains(@accesskey,'K')] | wait 24 -p
+:Undo-Steps
+Cancel | button | xpath | //span[text()='ancel']/..
+case: ErrorAQ
+Cancel | button | xpath | //div[contains(@id,'createQstn')]//span[text()='ancel']/..
+Cancel | button | xpath | //span[text()='ancel']/..
+end esac
+case: InvalidQuestionnaireTemplate
+Cancel Create | button | xpath | //table[contains(@id,'createPopup')]//button[@accesskey='C']
+WAIT UNTIL CLICKABLE | button | xpath | //h1[text()='Manage Questionnaires']
+end esac

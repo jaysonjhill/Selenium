@@ -1,0 +1,25 @@
+﻿
+
+[Manage Performance Notifications]
+:Properties
+Sheetname | MPN
+Action | Search Task
+Recursive | false
+:Pre-Prep
+skip:
+:Pre-Steps
+Header | h1 | xpath | //h1[text()='Manage Talent Notifications']
+:Fields
+Module Tab | button | xpath | //a[text()='Performance Management']
+Header | h1 | xpath | //h1[text()='Manage Talent Notifications']
+array | 1
+Notification | h1 | xpath | //td[text()="$String"] | locate
+Description | h1 | xpath | //td[text()="$String"]
+Notification | checkbox | xpath | //td[text()="$String"]/..//input
+stop
+:Post-Steps
+Save and Close | button | xpath | //span[text()='S']/../.. | wait 5
+Header | h1 | xpath | //h1[text()='Search']
+MPN | button | xpath | //a[text()='Manage Performance Notifications']
+:Undo-Steps
+skip:

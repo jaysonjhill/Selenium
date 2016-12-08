@@ -1,0 +1,494 @@
+
+[Manage Work Workday Patterns]
+:Properties
+Sheetname | Work Workday Patterns
+Action | Search Task
+Recursive | False
+Data Name | Name*
+:Pre-Prep
+skip:
+:Pre-Steps
+skip:
+:Fields
+Expand Search | button | xpath | //a[@title='Expand Search']
+Name | textbox | xpath | //label[text()='Name']/../..//input
+Search | button | xpath | //button[text()='Search']
+Result | button | xpath | //a[text()='$.sName*']/.. | wait 10 -p throws AlreadyExist:
+setExcelCol: Name*
+Create | button | xpath | //img[@title='Create Workday Pattern']/.. | wait 30 -p
+WUC | div | xpath | //td[contains(@id,'dialog')]//div[text()='Create Time Workday Pattern'] | wait 60 -p
+* Name | textbox | xpath | //td[contains(@id,'dialog')]//label[text()='Name']/../..//input
+Confirm Name | button | xpath | //td[contains(@id,'dialog')]//label[text()='Name']/../..//input[@title='$.sName*'] | wait 12 -c :
+Description | textbox | xpath | //td[contains(@id,'dialog')]//label[text()='Description']/../..//textarea
+* Length In Days | textbox | xpath | //td[contains(@id,'dialog')]//label[text()='Length In Days']/../..//input
+Add Row | button | xpath | //td[contains(@id,'dialog')]//img[@title='Add Row']/..
+Added Row | button | xpath | //td[contains(@id,'dialog')]//label[text()='Start Day']/../input[not(@value)] | wait 12 -c :throws InvalidPrimaryDetails(Name/Length of Days)
+Start Day | textbox | xpath | //td[contains(@id,'dialog')]//label[text()='Start Day']/../input[not(@value)]
+End Day | textbox | xpath | //td[contains(@id,'dialog')]//label[text()='End Day']/../input[not(@value)]
+Shift Name | textbox | xpath | //td[contains(@id,'dialog')]//label[text()='Shift Name']/../input
+Shift Type | span | xpath | //td[contains(@id,'dialog')]//span[contains(@id,'soc1')]/span[text()='$.sShift Type'] | wait 12 -c :
+:Post-Steps
+Cancel | button | xpath | //td[contains(@id,'dialog')]//button[@accesskey='S']
+WUC | h1 | xpath | //h1[text()='Manage Work Workday Patterns'] | wait 60 -p
+:Undo-Steps
+OK | button | xpath | //div[text()='Error']/ancestor::div[@data-afr-popupid]//button[text()='OK']
+Cancel | button | xpath | //td[contains(@id,'dialog')]//button[@accesskey='C']
+WUC | h1 | xpath | //h1[text()='Manage Work Workday Patterns'] | wait 60 -p
+case: AlreadyExist
+end esac
+case: InvalidPrimaryDetails(Name/Length of Days)
+Cancel | button | xpath | //td[contains(@id,'dialog')]//button[@accesskey='C']
+WUC | h1 | xpath | //h1[text()='Manage Work Workday Patterns'] | wait 60 -p
+end esac
+
+[Manage Work Shifts]
+:Properties
+Sheetname | Manage Work Shifts
+Action | Search Task
+Recursive | false
+Data Name | * Name
+:Pre-Prep
+skip:
+:Pre-Steps
+WUC | h1 | xpath | //h1[text()='Manage Work Shifts'] | wait 60 -p
+Create | button | xpath | //img[contains(@title,'Create Shift')]
+WUC | h1 | xpath | //div[text()='Create Time Shift'] | wait 60 -p
+:Fields
+*Name | textbox | xpath | //label[text()='Name']/../..//input
+Description | textbox | xpath | //label[text()='Description']/../..//textarea
+Code | textbox | xpath | //label[text()='Code']/../..//input
+*Start Time | textbox | xpath | //label[text()='Start Time']/../..//input
+*Duration | textbox | xpath | //label[text()='Duration']/../..//input
+*Duration2 | select | xpath | //label[text()='Duration']/../..//select | wait,unstale
+Category | select | xpath | //label[text()='Category']/../..//select | wait,unstale
+*Shift Detail Type | select | xpath | //label[text()='Shift Detail Type']/../..//select[not(@title='')] | wait 5,unstale -c
+Header | button | xpath | //h1[text()='Shift Details'] | wait 60 -p
+Create | button | xpath | //img[contains(@title,'Add Row')] | wait 5 -c
+Name | select | xpath | //label[text()='Name']/../..//select | wait,unstale -c
+Day | textbox | xpath | //label[text()='Day']/../..//input | wait 5 -c
+Start Time | textbox | xpath | //input[contains(@id,'it4::content')] | wait 5 -c
+Duration | textbox | xpath | //input[contains(@id,'inputText11::content')] | wait 5 -c
+Duration Unit | select | xpath | //label[text()='Duration Unit']/../..//select | wait,unstale -c
+Minimum Break minutes | textbox | xpath | //label[text()='Minimum Break Minutes']/../..//input | wait 5 -c
+Maximum Break Minutes | textbox | xpath | //label[text()='Maximum Break Minutes']/../..//input | wait 5 -c
+Core Work | textbox | xpath | //label[text()='Core Work']/../..//input | wait 5 -c
+:Post-Steps
+SaC | button | xpath | //button[contains(text(),'ave and Close')]
+Header | h1 | xpath | //h1[text()='Manage Work Shifts'] | wait 60 -p
+:Undo-Steps
+Cancel | button | xpath | //button[contains(@accesskey,'C')]
+
+[Manage Data Role and Security Profiles]
+:Properties
+Sheetname | Data Role and Security Profiles
+Action | Search Task
+Recursive | False
+Data Name | Data Role*
+:Pre-Prep
+skip:
+:Pre-Steps
+Create | button | xpath | //span[text()=' Create']/.. | wait 60 -p
+Header | h1 | xpath | //h1[text()='Create Data Role: Select Role']
+:Fields
+Data Role | textbox | xpath | //label[text()='Data Role']/../../td/input
+Job Role | textbox | xpath | //label[text()='Job Role']/../..//input | wait
+Role Description | textbox | xpath | //label[text()='Role Description']/../..//textarea[not(@title='')]
+Delegation Allowed | checkbox | xpath | //input[@type='checkbox']
+Next | button | xpath | //button[text()='Next']
+Organization Security Profile | textbox | xpath | //label[text()='Organization Security Profile']/../..//input
+Public Security Profile | textbox | xpath | //h2[text()='Public Person']/../../../../../../..//label[text()='Person Security Profile']/../..//input
+Position Security Profile | textbox | xpath | //label[text()='Position Security Profile']/../..//input
+Country Security Profile | textbox | xpath | //label[text()='Country Security Profile']/../..//input
+LDG Security Profile | textbox | xpath | //label[text()='LDG Security Profile']/../..//input
+Person Security Profile | textbox | xpath | //h2[text()='Person']/../../../../../../..//label[text()='Person Security Profile']/../..//input
+Document Type Security Profile | textbox | xpath | //label[text()='Document Type Security Profile']/../..//input
+Payroll Security Profile | textbox | xpath | //label[text()='Payroll Security Profile']/../..//input
+Payroll Flow Security Profile | textbox | xpath | //label[text()='Flow Pattern Security Profile']/../..//input
+:Post-Steps
+Review | button | xpath | //button[text()='Review'] | wait 10
+Review | button | xpath | //a[text()='Review'] | wait 5
+Submit | button | xpath | //span[text()='m']/.. | wait 60 -p
+Header | h1 | xpath | //h1[text()='Manage Data Roles and Security Profiles'] | wait 180 -p
+:Undo-Steps
+Cancel | button | xpath | //button[@accesskey='C']
+Yes | button | xpath | //button[text()='Yes']
+Header | h1 | xpath | //h1[text()='Manage Data Roles and Security Profiles']
+
+[Manage Value Sets]
+:Properties
+Sheetname | Value Sets
+Action | Search Task
+Recursive | false
+:Pre-Prep
+skip:
+:Pre-Steps
+Create | button | xpath | //img[@title='Create']/..
+Header | button | xpath | //h1[text()='Create Value Set'] | wait 60 -p
+:Fields
+Value Set Code | textbox | xpath | //tr/td/label[contains(text(),'Value Set Code')]/../..//input | save
+Description | textbox | xpath | //tr/td/label[contains(text(),'Description')]/../..//input
+Module | dropdown | xpath | //label[contains(text(),'Module')]/../..//input | save
+Validation Type | select | xpath | //label[contains(text(),'Validation Type')]/../..//select
+*Validation Type | button | xpath | //select[@title='$.sValidation Type*']/../..//label[text()='Validation Type'] | wait 6 -p case $.sValidation Type*:
+case: Table
+setExcelCol: Security Enabled
+Security Enabled | checkbox | xpath | //label[text()='Security enabled']/..//input
+Data Security Resource Name | textbox | xpath | //label[text()='Data Security Resource Name']/../..//input
+setExcelCol: FROM Clause*
+FROM Clause | textbox | xpath | //label[contains(text(),'FROM Clause')]/../..//input
+Header | button | xpath | //h1[text()='Create Value Set']
+setExcelCol: Value Column Name*
+Value Column Name | textbox | xpath | //label[contains(text(),'Value Column Name')]/../..//input | wait
+Value Column Length | nullable | xpath | //label[text()='Value Column Length']/../..//td[text()]
+Description Column Name | textbox | xpath | //label[contains(text(),'Description Column Name')]/../..//input
+ID Column Name | textbox | xpath | //label[contains(text(),'ID Column Name')]/../..//input
+Start Date Column Name | textbox | xpath | //label[contains(text(),'Start Date Column Name')]/../..//input
+End Date Column Name | textbox | xpath | //label[contains(text(),'End Date Column Name')]/../..//input
+WHERE Clause | textbox | xpath | //label[contains(text(),'WHERE Clause')]/../..//textarea
+ORDER BY Clause | textbox | xpath | //label[contains(text(),'ORDER BY Clause')]/../..//input
+resume esac
+case: Format Only
+setExcelCol: Minimum Value
+Minimum Value | textbox | xpath | //label[text()='Minimum Value']/../..//input
+Maximum Value | textbox | xpath | //label[text()='Maximum Value']/../..//input
+resume esac
+case: Independent
+setExcelCol: Security Enabled
+Security Enabled | checkbox | xpath | //label[text()='Security enabled']/..//input
+Data Security Resource Name | textbox | xpath | //label[text()='Data Security Resource Name']/../..//input
+setExcelCol: Minimum Value
+Minimum Value | textbox | xpath | //label[text()='Minimum Value']/../..//input
+Maximum Value | textbox | xpath | //label[text()='Maximum Value']/../..//input
+resume esac
+case: Dependent
+setExcelCol: Security Enabled
+Security Enabled | checkbox | xpath | //label[text()='Security enabled']/..//input
+Data Security Resource Name | textbox | xpath | //label[text()='Data Security Resource Name']/../..//input
+setExcelCol: Minimum Value
+Minimum Value | textbox | xpath | //label[text()='Minimum Value']/../..//input
+Maximum Value | textbox | xpath | //label[text()='Maximum Value']/../..//input
+Value Set Code | dropdown | xpath | //label[text()='Value Set Code']/../..//input
+resume esac
+case: Subset
+setExcelCol: Value Set Code
+Value Set Code | dropdown | xpath | //label[text()='Value Set Code']/../..//input
+resume esac
+setExcelCol: Value Data Type*
+Value Data Type | select | xpath | //label[contains(text(),'Value Data Type')]/../..//select
+*Value Data Type | button | xpath | //select[@title='$.sValue Data Type*']/../..//label[text()='Value Data Type'] | wait 6 -p case $.sValue Data Type*:
+case: Character
+setExcelCol: Value Subtype
+Value Subtype | select | xpath | //label[text()='Value Subtype']/../..//select | case $.sValue Subtype
+case: Text
+setExcelCol: Maximum Length
+Maximum Length | textbox | xpath | //label[text()='Maximum Length']/../..//input
+Uppercase only | checkbox | xpath | //label[text()='Uppercase only']/..//input
+Zero fill | checkbox | xpath | //label[text()='Zero fill']/..//input
+resume esac
+case: Translated Text
+setExcelCol: Maximum Length
+Maximum Length | textbox | xpath | //label[text()='Maximum Length']/../..//input
+resume esac
+case: Numeric digits only
+setExcelCol: Maximum Length
+Maximum Length | textbox | xpath | //label[text()='Maximum Length']/../..//input
+resume esac
+case: Time(20:08)
+resume esac
+case: Time(20:08:08)
+resume esac
+resume esac
+:Post-Steps
+Save and Close | button | xpath | //button[contains(text(),'and Close')]
+Header | nullable | xpath | //h1[text()='Manage Value Sets']
+:Undo-Steps
+Cancel | button | xpath | //button[text()='ancel']
+Header | nullable | xpath | //h1[text()='Manage Value Sets']
+
+[Manage Person Types]
+:Properties
+Sheetname | Person Types
+Action | Search Task
+Recursive | false
+Data Name | Assignment Person Type
+:Pre-Prep
+skip:
+:Pre-Steps
+skip:
+:Fields
+System Person Type | button | xpath | //td[text()='$.sSystem Person Type']/.. | wait 10
+//Edit
+setExcelCol: Assignment Person Type
+Assignment Person Type | button | xpath | //span[contains(@class,'AFReadOnly')]//span[text()='$.sAssignment Person Type'] | locator
+Assignment Person Type | button | xpath | //span[contains(@class,'AFReadOnly')]//span[text()='$.sAssignment Person Type'] | wait 10 -c :case Add
+Assignment Person Type | textbox | xpath | //label[text()='Assignment Person Type']/../input | locate
+Status | select | xpath | //label[text()='Status']/../select | unstale
+Default | checkbox | xpath | //td[@title='Assignment Person Type']/..//td[3]//input
+//Add
+case: Add
+Add | button | xpath | //span[text()='Add']/.. | wait 5
+setExcelCol: Assignment Person Type
+Assignment Person Type | button | xpath | //tr[contains(@class,'Selected')]//td[1] | locator up
+Assignment Person Type | textbox | xpath | //label[text()='Assignment Person Type']/..//input | wait 15 -p
+Status | select | xpath | //label[text()='Status']/../select | unstale
+Default | checkbox | xpath | //td[@title='Assignment Person Type']/..//td[3]//input
+resume esac
+:Post-Steps
+Save and Close | button | xpath | //button[@accesskey='S']
+OK | button | xpath | //button[text()='OK']
+Header | button | xpath | //a[text()='Manage Person Types']
+:Undo-Steps
+Cancel | button | xpath | //button[@accesskey='C']
+Yes | button | xpath | //button[@accesskey='Y']
+WAIT TO DISAPPEAR | button | xpath | //button[@accesskey='Y']
+
+[Manage Descriptive Flexfields]
+:Properties
+Sheetname | Descriptive Flexfields
+Action | Search Task
+Recursive | false
+:Pre-Prep
+skip:
+:Pre-Steps
+:Fields
+Flexfield Code | textbox | xpath | //label[text()=' Flexfield Code']/../..//input | wait 10 -p
+Search | button | xpath | //button[contains(text(),'Search')]
+Result | button | xpath | //td[text()='$.sFlexfield Code*']
+Edit | button | xpath | //img[@title='Edit']/..
+Global Segments | button | xpath | //td[2][text()='$.sName*'] | wait 10 -p case Edit:case Add
+//Edit
+case: Edit
+Edit | button | xpath | //img[@alt='Delete']/../../../..//img[@title='Edit']
+Name | textbox | xpath | //label[text()='Name']/../..//input
+Code | h1 | xpath | //span[text()='$.sCode*']
+API Name | h1 | xpath | //span[text()='$.sAPI Name*']
+Description | textbox | xpath | //label[text()='Description']/../..//textarea
+Enabled | checkbox | xpath | //label[text()='Enabled']/../..//input
+Data Type | h1 | xpath | //label[text()='Data Type']/../..//span[text()='$.sData Type']
+Table Column | h1 | xpath | //label[text()='Table Column']/../..//span[text()='$.sTable Column']
+Value Set | h1 | xpath | //label[text()='Value Set']/../..//input[@value='$.sValue Set']
+Range Type | select | xpath | //label[text()='Range Type']/../..//select | unstale
+Required | checkbox | xpath | //label[text()='Required']/..//input
+Default Type | select | xpath | //label[text()='Default Type']/../..//select
+Default Value | textbox | xpath | //label[text()='Default Value']/../../td/input | wait 6 -p :
+setExcelCol: Default Value
+Default Value | textbox | xpath | //label[text()='Default Value']/../..//textarea | wait 6 -p :
+Prompt | textbox | xpath | //label[text()='Prompt']/../..//input
+Display Type | select | xpath | //label[text()='Display Type']/../..//select
+Display Size | textbox | xpath | //label[text()='Display Size']/../..//input
+Display Height | textbox | xpath | //label[text()='Display Height']/../..//input
+Read-only | checkbox | xpath | //label[text()='Read-only']/..//input
+Definition Help Text | textbox | xpath | //label[text()='Definition Help Text']/../..//textarea
+Instruction Help Text | textbox | xpath | //label[text()='Instruction Help Text']/../..//textarea
+BI Enabled | checkbox | xpath | //label[text()='BI Enabled']/..//input
+BI Label | select | xpath | //label[text()='BI Label']/../..//select[not(@disabled)] | wait 10 -p :
+Save and Close | button | xpath | //span[text()='S']/../../span[text()='ave and Close']
+end esac
+//EditEnd
+case: Add
+Create | button | xpath | //h2[text()='Global Segments']/../../../../../../..//img[@title='Create']
+Name | textbox | xpath | //label[text()='Name']/../..//input
+Code | textbox | xpath | //label[text()='Code']/../..//input
+Code Wait | nullable | xpath | //label[text()='Code']/../../td/input[@title='$.sCode*'] | wait 3 -c :
+API Name | textbox | xpath | //label[text()='API Name']/../..//input
+Description | textbox | xpath | //label[text()='Description']/../..//textarea
+Enabled | checkbox | xpath | //label[text()='Enabled']/../..//input
+Data Type | select | xpath | //label[text()='Data Type']/../..//select | unstale
+Table Column | button | xpath | //a[@title='Search: Table Column']/../..//input/../span/a
+Search | button | xpath | //table[contains(@id,'columnNameId')]//a[text()='Search...']
+Search and Select | nullable | xpath | //div[text()='Search and Select: Table Column']
+Search Table Column Name | textbox | xpath | //div[text()='Search and Select: Table Column']/../../../../../../..//label[text()=' Name']/..//input
+Search  | button | xpath | //div[text()='Search and Select: Table Column']/../../../../../../..//button[text()='Search']
+Search Result | button | xpath | //div[text()='Search and Select: Table Column']/../../../../../../..//td[text()='$.sTable Column'] | wait 10 -c :throws invalid Table Column
+OK | button | xpath | //div[text()='Search and Select: Table Column']/../../../../../../..//button[text()='OK']
+Value Set | button | xpath | //a[@title='Search: Value Set']/../../input/../span/a
+Search | button | xpath | //table[contains(@id,'valueSetCodeId')]//a[text()='Search...']
+Search and Select | nullable | xpath | //div[text()='Search and Select: Value Set']
+Search Value Set | textbox | xpath | //div[text()='Search and Select: Value Set']/../../../../../../..//label[text()=' Value Set']/..//input
+Search | button | xpath | //div[text()='Search and Select: Value Set']/../../../../../../..//button[text()='Search']
+Search Result | button | xpath | //div[text()='Search and Select: Value Set']/../../../../../../..//td[text()='$.sValue Set'] | throws invalid Value Set
+OK | button | xpath | //div[text()='Search and Select: Value Set']/../../../../../../..//button[text()='OK']
+Range Type | select | xpath | //label[text()='Range Type']/../..//select | unstale
+Required | checkbox | xpath | //label[text()='Required']/..//input
+Default Type | select | xpath | //label[text()='Default Type']/../..//select
+Default Value | textbox | xpath | //label[text()='Default Value']/../../td/input | wait 6 -p :
+setExcelCol: Default Value
+Default Value | textbox | xpath | //label[text()='Default Value']/../..//textarea | wait 6 -p :
+Prompt | textbox | xpath | //label[text()='Prompt']/../..//input
+Display Type | select | xpath | //label[text()='Display Type']/../..//select
+Display Size | textbox | xpath | //label[text()='Display Size']/../..//input
+Display Height | textbox | xpath | //label[text()='Display Height']/../..//input
+Read-only | checkbox | xpath | //label[text()='Read-only']/..//input
+Definition Help Text | textbox | xpath | //label[text()='Definition Help Text']/../..//textarea
+Instruction Help Text | textbox | xpath | //label[text()='Instruction Help Text']/../..//textarea
+BI Enabled | checkbox | xpath | //label[text()='BI Enabled']/..//input
+BI Label | select | xpath | //label[text()='BI Label']/../..//select[not(@disabled)] | wait 10 -p :
+Save and Close | button | xpath | //span[text()='S']/../../span[text()='ave and Close']
+end esac
+:Post-Steps 
+Save and Close | button | xpath | //span[text()='S']/../../button[text()='ave and Close']
+Deploy Flexfield | button | xpath | //span[text()='Deploy Flexfield']
+OK | button | xpath | //span[contains(@id,'popupbar')]//button[text()='OK' and not(@disabled)] | wait 3600 -p
+:Undo-Steps
+Cancel | button | xpath | //button[text()='ancel']
+Header | h1 | xpath | //h1[contains(text(),'Edit Descriptive Flexfield')]
+Cancel | button | xpath | //button[text()='ancel']
+Header | button | xpath | //h1[contains(text(),'Manage Descriptive Flexfields')]
+case: invalid Table Column
+Cancel Search | button | xpath | //div[text()='Search and Select: Table Column']/../../../../../../..//button[text()='Cancel']
+Cancel | button | xpath | //span[text()='C']/../..//button[text()='ancel']
+end esac
+case: invalid Value Set
+Cancel Search | button | xpath | //div[text()='Search and Select: Value Set']/../../../../../../..//button[text()='Cancel']
+Cancel | button | xpath | //span[text()='C']/../..//button[text()='ancel']
+end esac
+
+[Manage Common Lookups]
+:Properties
+Sheetname | Common Lookups
+Action | Search Task
+Recursive | True
+Data Name | Lookup Type*
+:Pre-Prep
+skip:
+:Pre-Steps
+Header | h1 | xpath | //h1[text()='Manage Common Lookups   '] | wait 60 -p
+:Fields
+Lookup Type | textbox | xpath | //label[text()=' Lookup Type']/../..//input
+Search | button | xpath | //button[text()='Search']
+LookupType | button | xpath | //span[text()='$.sLookup Type*'] | wait 10 -c case Edit:
+//Add
+setExcelCol: Lookup Type*
+Create | button | xpath | //span[text()='Customization Level']/../../../../../../../../../..//img[@alt='New']
+Lookup Type | textbox | xpath | //span[text()='Customization Level']/../../../../../../../..//label[text()='Lookup Type']/../..//input
+Meaning | textbox | xpath | //span[text()='Customization Level']/../../../../../../../..//label[text()='Lookup Type']/../../..//td[2]//input
+Description | textbox | xpath | //span[text()='Customization Level']/../../../../../../../..//label[text()='Lookup Type']/../../..//td[3]//input
+Module | dropdown | xpath | //span[text()='Customization Level']/../../../../../../../..//label[text()='Lookup Type']/../../..//td[4]//input
+Save | button | xpath | //button[contains(text(),'Save')]
+array | 4
+New | button | xpath | //img[@alt='Query By Example']/../../../../../../../../../../..//img[@title='New']
+Lookup Code | textbox | xpath | //label[text()='Lookup Code']/../../..//td[3]//input
+Display Sequence | textbox | xpath | //label[text()='Lookup Code']/../../..//td[4]//input
+Enabled | checkbox | xpath | //label[text()='Lookup Code']/../../..//td[5]//input
+Start Date | textbox | xpath | //label[text()='Lookup Code']/../../..//td[6]//input
+End Data | textbox | xpath | //label[text()='Lookup Code']/../../..//td[7]//input
+Meaning | textbox | xpath | //label[text()='Lookup Code']/../../..//td[8]//input
+Description | textbox | xpath | //label[text()='Lookup Code']/../../..//td[9]//input
+Tag | textbox | xpath | //label[text()='Lookup Code']/../../..//td[10]//input
+stop
+//Edit
+case: Edit
+setExcelCol: Meaning*
+Meaning | textbox | xpath | //span[text()='$.sLookup Type*']/../../..//td[2]//input
+Description | textbox | xpath | //span[text()='$.sLookup Type*']/../../..//td[3]//input
+Module | dropdown | xpath | //span[text()='$.sLookup Type*']/../../..//td[4]//input
+Save | button | xpath | //button[contains(text(),'Save')]
+array | 4
+setExcelCol: Display Sequence
+Display Sequence | textbox | xpath | //span[text()='$.sLookup Code*']/../../..//td[4]//input | wait 6 -p :case ALT
+Enabled | checkbox | xpath | //span[text()='$.sLookup Code*']/../../..//td[5]//input
+Start Date | textbox | xpath | //span[text()='$.sLookup Code*']/../../..//td[6]//input
+End Data | textbox | xpath | //span[text()='$.sLookup Code*']/../../..//td[7]//input
+Meaning | textbox | xpath | //span[text()='$.sLookup Code*']/../../..//td[8]//input
+Description | textbox | xpath | //span[text()='$.sLookup Code*']/../../..//td[9]//input
+Tag | textbox | xpath | //span[text()='$.sLookup Code*']/../../..//td[10]//input
+stop
+resume esac
+case: ALT
+setExcelCol: Lookup Code*
+New | button | xpath | //img[contains(@title,'Excel')]/../../../..//img[@title='New']
+Lookup Code | textbox | xpath | //label[text()='Lookup Code']/../../..//td[3]//input
+Display Sequence | textbox | xpath | //label[text()='Lookup Code']/../../..//td[4]//input
+Enabled | checkbox | xpath | //label[text()='Lookup Code']/../../..//td[5]//input
+Start Date | textbox | xpath | //label[text()='Lookup Code']/../../..//td[6]//input
+End Data | textbox | xpath | //label[text()='Lookup Code']/../../..//td[7]//input
+Meaning | textbox | xpath | //label[text()='Lookup Code']/../../..//td[8]//input
+Description | textbox | xpath | //label[text()='Lookup Code']/../../..//td[9]//input
+Tag | textbox | xpath | //label[text()='Lookup Code']/../../..//td[10]//input
+resume esac
+:Post-Steps
+Save and Close | button | xpath | //button[contains(text(),'and Close')]
+Input | nullable | xpath | //input[@value='Manage Common Lookups'] | wait 60 -p
+:Undo-Steps
+Cancel | button | xpath | //button[text()='ancel']
+Header | button | xpath | //h1[text()='Search']
+
+[Manage Person Name Formats]
+:Properties
+Sheetname | Person Name Formats
+Action | Search Task
+Recursive | False
+Data Name | Country
+:Pre-Prep
+skip:
+:Pre-Steps
+Header | button | xpath | //h1[text()='Manage Name Formats']
+:Fields
+Search | textbox | xpath | //label[text()='Country']/../..//input
+Search | select | xpath | //label[text()='Format Type']/../..//select | unstale
+Search Enter | button | xpath | //button[text()='Search']
+Result | button | xpath | //td[text()='$.sScope']/..//a | wait 6 -p :case Add
+//Edit
+setExcelCol: Country
+Country | h1 | xpath | //label[text()='Country']/../..//span[text()='$.sCountry']
+Format Type | h1 | xpath | //label[text()='Format Type']/../..//span[text()='$.sFormat Type']
+Scope | h1 | xpath | //label[text()='Scope']/../..//span[text()='$.sScope']
+Counter | switch | xpath | //table[@summary='Selected Name Components']/tbody/tr
+Remove Selected | button-repeat | xpath | //img[@title='Remove Selected Items']/..
+case: Add
+setExcelCol: Country
+Create | button | xpath | //span[text()=' Create']/..
+Header | nullable | xpath | //h1[text()='Create Name Format']
+Remove Selected | button | xpath | //img[@title='Remove Selected Items']/.. | wait 60 -p
+Country | textbox | xpath | //label[text()='Country']/../..//input
+Close Country | button | xpath | //a[contains(@id,'territoryShortName')][@title='Close'] | wait 12 -c :
+Format Type | select | xpath | //label[text()='Format Type']/../..//select | unstale
+Scope | select | xpath | //label[text()='Scope']/../..//select | unstale
+resume esac
+array | 3
+Available Name Components | button | xpath | //table[@summary='Available Name Components']//span[text()='First Name'] | locator up
+Available Name Components | button | xpath | //table[@summary='Available Name Components']//span[text()='$.sAvailable Name Components'] | wait 6 -p :
+Locate Name Component | button | xpath | //table[@summary='Available Name Components']//span[text()='$.sAvailable Name Components'] | locator 15
+Located? | button | xpath | //table[@summary='Available Name Components']//span[text()='$.sAvailable Name Components'] | wait 10 -p case Move:case $.sAvailable Name Components
+case: Comma
+Check TD | button | xpath | //table[@summary='Available Name Components']//td[contains(text(),'$.sAvailable Name Components')] | wait 10 -p case Move:
+resume esac
+case: Space
+Check TD | button | xpath | //table[@summary='Available Name Components']//td[contains(text(),'$.sAvailable Name Components')] | wait 10 -p case Move:
+resume esac
+case: Semicolon
+Check TD | button | xpath | //table[@summary='Available Name Components']//td[contains(text(),'$.sAvailable Name Components')] | wait 10 -p case Move:
+resume esac
+case: Quotation mark
+Check TD | button | xpath | //table[@summary='Available Name Components']//td[contains(text(),'$.sAvailable Name Components')] | wait 10 -p case Move:
+resume esac
+case: Forward slash
+Check TD | button | xpath | //table[@summary='Available Name Components']//td[contains(text(),'$.sAvailable Name Components')] | wait 10 -p case Move:
+resume esac
+case: Colon
+Check TD | button | xpath | //table[@summary='Available Name Components']//td[contains(text(),'$.sAvailable Name Components')] | wait 10 -p case Move:
+resume esac
+case: Open Bracket
+Check TD | button | xpath | //table[@summary='Available Name Components']//td[contains(text(),'$.sAvailable Name Components')] | wait 10 -p case Move:
+resume esac
+case: Close Bracket
+Check TD | button | xpath | //table[@summary='Available Name Components']//td[contains(text(),'$.sAvailable Name Components')] | wait 10 -p case Move:
+resume esac
+case: Period
+Check TD | button | xpath | //table[@summary='Available Name Components']//td[contains(text(),'$.sAvailable Name Components')] | wait 10 -p case Move:
+resume esac
+case: Move
+Move Components | button | xpath | //img[@title='Move to Other List']/.. | wait 5
+Return to Top | button | xpath | //table[@summary='Available Name Components']//span[text()='First Name'] | locator up
+resume esac
+stop
+Save | button | xpath | //span[text()='Save']/../..
+OK | button | xpath | //span[text()='K']/../.. | wait 15 -p :
+:Post-Steps
+Cancel | button | xpath | //span[text()='C']/..
+Yes | button | xpath | //span[text()='Y']/..
+Header | h1 | xpath | //h1[text()='Manage Name Formats'] | wait 60 -p
+:Undo-Steps
+Cancel | button | xpath | //span[text()='C']/..
+Yes | button | xpath | //span[text()='Y']/..
+Header | h1 | xpath | //h1[text()='Manage Name Formats'] | wait 60 -p
