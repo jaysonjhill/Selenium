@@ -52,8 +52,8 @@ public class SeleniumDriver {
 	}
 	public void pageload()
 	{
-		driver.get("http://52.54.0.28:810/index.php");
-		System.out.println("http://52.54.0.28:810/index.php");
+		driver.get("http://52.54.0.28:443/index.php");
+		System.out.println("http://52.54.0.28:443/index.php");
 		System.out.println("Loading MyEstiMate...");
 		takeScreenShot("Index Page");
 	}
