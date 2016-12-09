@@ -80,8 +80,8 @@ public class SeleniumDriver {
 	// Screenshot
 	public void takeScreenShot(String caseName) {
 		String datePrefix = new SimpleDateFormat("yyyyMMdd_HHmmssSSS").format(new Date());
-		String path = "C:/Users/jayson.j.b.bondad/Desktop/selenium-test/Testing";
-		String ssPath = "C:/Users/jayson.j.b.bondad/Desktop/selenium-test/";
+		String path = "/var/jenkins_home/jobs/SampleWorkspace/jobs/SampleProject/jobs/SampleMavenJob/workspace/screenshots";
+		String ssPath = "/var/jenkins_home/jobs/SampleWorkspace/jobs/SampleProject/jobs/SampleMavenJob/workspace/screenshots";
 		try {
 			File ssDir = new File(ssPath);
 			if (!ssDir.exists())
